@@ -9,9 +9,10 @@ router.post('/assign', (req, res) => {
     const names = req.body.names;
     console.log(names);
     res.json(names);
+    const date = Date.now().toString();
 
     const jsonString = JSON.stringify(names, null, 2);
-    const fileName = "names-backup.json";
+    const fileName = `names-${date}.json`;
 
     const outputPath = path.join(__dirname, '../backups');
     if (!fs.existsSync(outputPath)) {
