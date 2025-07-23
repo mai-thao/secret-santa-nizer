@@ -9,10 +9,13 @@ router.post('/assign', (req, res) => {
     const names = req.body.names;
     console.log(names);
     res.json(names);
-    const date = Date.now().toString();
+    
+    const now = new Date();
+    const localTime = now.toLocaleString('sv-SE', { timeZone: 'America/Chicago' });
+    const date = localTime.replace(/[ ]/g, '_').replace(/[:]/g, '-') // Format: yyyy-mm-dd_hh-mm-ss
 
     const jsonString = JSON.stringify(names, null, 2);
-    const fileName = `names-${date}.json`;
+    const fileName = `names_${date}.json`;
 
     const outputPath = path.join(__dirname, '../backups');
     if (!fs.existsSync(outputPath)) {
