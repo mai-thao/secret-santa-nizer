@@ -1,7 +1,7 @@
 {
   "name": "secret-santa-nizer",
   "version": "1.0.0",
-  "description": "Draw and pick names for Secret Santa! Special Edition for the Thao fam",
+  "description": "Draw and pick names for Secret Santa! Special Edition for the Thao family",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
