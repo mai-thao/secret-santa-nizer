@@ -14,8 +14,16 @@ router.post('/assign', (req, res) => {
     const fileName = "names-backup.json";
 
     const outputPath = path.join(__dirname, '../backups');
-    fs.writeFileSync(path.join(outputPath, fileName), jsonString);
-    console.log(`Data successfully saved to ${fileName}`);
+    if (!fs.existsSync(outputPath)) {
+        fs.mkdirSync(outputPath); // Create the directory if doesn't exist
+    }
+
+    try {
+        fs.writeFileSync(path.join(outputPath, fileName), jsonString);
+        console.log(`Data successfully saved to ${fileName}`);
+    } catch (error) {
+        console.log('Error writing to file: ', error);
+    }
 });
 
 module.exports = router;
