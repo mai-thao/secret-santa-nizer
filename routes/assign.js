@@ -14,6 +14,10 @@ router.post('/assign', (req, res) => {
     const localTime = now.toLocaleString('sv-SE', { timeZone: 'America/Chicago' });
     const date = localTime.replace(/[ ]/g, '_').replace(/[:]/g, '-') // Format: yyyy-mm-dd_hh-mm-ss
 
+    // TODO: Add randomization logic for secret santa assignment
+    // How to handle odd participants? One person can have two secret santas
+    // Make sure no one is assigned to themselves
+    
     const jsonString = JSON.stringify(names, null, 2);
     const fileName = `names_${date}.json`;
 
