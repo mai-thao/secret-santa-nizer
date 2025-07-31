@@ -18,10 +18,6 @@ router.post('/assign', (req, res) => {
     const date = localTime.replace(/[ ]/g, '_').replace(/[:]/g, '-') // Format: yyyy-mm-dd_hh-mm-ss
 
     const assignments = assign(names);
-
-    // TODO: Add randomization logic for secret santa assignment
-    // How to handle odd participants? One person can have two secret santas
-    // Make sure no one is assigned to themselves
     
     const jsonString = JSON.stringify(assignments, null, 2);
     const fileName = `assignments_${date}.json`;
@@ -33,7 +29,7 @@ router.post('/assign', (req, res) => {
 
     try {
         fs.writeFileSync(path.join(outputPath, fileName), jsonString);
-        console.log(`Data successfully saved to ${fileName}`);
+        console.log(`Assignments successfully saved to ${fileName}`);
         res.status(201).json(jsonString);
     } catch (error) {
         console.log('Error writing to file: ', error);
@@ -44,6 +40,7 @@ router.post('/assign', (req, res) => {
 // reorder them based on a random number between -0.5 and 0.5. The original names are then paired with
 // the ones from the shuffled list to create a "random" pairing!
 // Read this informational post about why 0.5: https://www.codemzy.com/blog/shuffle-array-javascript)
+// Wishlist: Learn more about Fisher-Yates algorithm
 function assign(names) {
     const shuffled = names.slice().sort(() => Math.random() - 0.5);
     const assignments = {};
