@@ -17,12 +17,14 @@ router.post('/assign', (req, res) => {
     const localTime = now.toLocaleString('sv-SE', { timeZone: 'America/Chicago' });
     const date = localTime.replace(/[ ]/g, '_').replace(/[:]/g, '-') // Format: yyyy-mm-dd_hh-mm-ss
 
+    const assignments = assign(names);
+
     // TODO: Add randomization logic for secret santa assignment
     // How to handle odd participants? One person can have two secret santas
     // Make sure no one is assigned to themselves
     
-    const jsonString = JSON.stringify(names, null, 2);
-    const fileName = `names_${date}.json`;
+    const jsonString = JSON.stringify(assignments, null, 2);
+    const fileName = `assignments_${date}.json`;
 
     const outputPath = path.join(__dirname, '../backups');
     if (!fs.existsSync(outputPath)) {
@@ -37,5 +39,22 @@ router.post('/assign', (req, res) => {
         console.log('Error writing to file: ', error);
     }
 });
+
+// A simple and naive "randomization" where it creates a copy of the original names then "scramble" or
+// reorder them based on a random number between -0.5 and 0.5. The original names are then paired with
+// the ones from the shuffled list to create a "random" pairing!
+// Read this informational post about why 0.5: https://www.codemzy.com/blog/shuffle-array-javascript)
+function assign(names) {
+    const shuffled = names.slice().sort(() => Math.random() - 0.5);
+    const assignments = {};
+
+    names.forEach((name, i) => {
+        assignments[name] = shuffled[i];
+    });
+
+    // TODO: Add logic to check if they're assigned themselves
+
+    return assignments;
+}
 
 module.exports = router;
