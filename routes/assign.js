@@ -8,7 +8,10 @@ const router = express.Router();
 router.post('/assign', (req, res) => {
     const names = req.body.names;
     console.log(names);
-    res.json(names);
+
+    if (names.length < 2) {
+        return res.status(400).json({ error: "Needs at least 2 participants!"})
+    }
     
     const now = new Date();
     const localTime = now.toLocaleString('sv-SE', { timeZone: 'America/Chicago' });
@@ -29,6 +32,7 @@ router.post('/assign', (req, res) => {
     try {
         fs.writeFileSync(path.join(outputPath, fileName), jsonString);
         console.log(`Data successfully saved to ${fileName}`);
+        res.status(201).json(jsonString);
     } catch (error) {
         console.log('Error writing to file: ', error);
     }
