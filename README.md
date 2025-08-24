@@ -7,7 +7,7 @@ Assignments are stored in the `/backups` directory.
 This project uses [npm](https://www.npmjs.com/) (Nope Package Manager) to manage and install its dependencies
 1) Execute the command: `npm install`
 
-### How to Run the App
+### How to Run the Backend Node.js App
 1) Execute the command: `node server.js`
 2) Call the endpoint using Insomnia or [curl](https://curl.se/) below:
 ```
@@ -20,3 +20,8 @@ _If you don't have `npm` or Node.js installed on your local machine, see the ste
 ### Wishlist
 * Instead of saving assignments to JSON files, save into sqlite3 database
 * Learn more about Fisher-Yates algorithm for more advanced randomization logic
+
+### How to Run the Frontend React App
+1) Execute the command: `npm run dev`
+2) Open your browser and navigate to: http://localhost:5173/
+3) Terminate the app with: Ctrl + C
