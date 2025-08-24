@@ -40,7 +40,6 @@ router.post('/assign', (req, res) => {
 // reorder them based on a random number between -0.5 and 0.5. The original names are then paired with
 // the ones from the shuffled list to create a "random" pairing!
 // Read this informational post about why 0.5: https://www.codemzy.com/blog/shuffle-array-javascript)
-// Wishlist: Learn more about Fisher-Yates algorithm
 function assign(names) {
     let shuffled;
     let valid = false;
