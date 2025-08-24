@@ -28,8 +28,8 @@ router.post('/assign', (req, res) => {
     }
 
     try {
-        fs.writeFileSync(path.join(outputPath, fileName), jsonString);
-        console.log(`Assignments successfully saved to ${fileName}`);
+//        fs.writeFileSync(path.join(outputPath, fileName), jsonString);
+//        console.log(`Assignments successfully saved to ${fileName}`);
         res.status(201).json(assignments);
     } catch (error) {
         console.log('Error writing to file: ', error);
@@ -42,14 +42,19 @@ router.post('/assign', (req, res) => {
 // Read this informational post about why 0.5: https://www.codemzy.com/blog/shuffle-array-javascript)
 // Wishlist: Learn more about Fisher-Yates algorithm
 function assign(names) {
-    const shuffled = names.slice().sort(() => Math.random() - 0.5);
-    const assignments = {};
+    let shuffled;
+    let valid = false;
 
+    // Continuously shuffle until everyone gets someone else
+    while (!valid) {
+        shuffled = names.slice().sort(() => Math.random() - 0.5);
+        valid = names.every((name, i) => name !== shuffled[i]);
+    }
+
+    const assignments = {};
     names.forEach((name, i) => {
         assignments[name] = shuffled[i];
     });
-
-    // TODO: Add logic to check if they're assigned themselves
 
     return assignments;
 }
