@@ -28,8 +28,8 @@ router.post('/assign', (req, res) => {
     }
 
     try {
-//        fs.writeFileSync(path.join(outputPath, fileName), jsonString);
-//        console.log(`Assignments successfully saved to ${fileName}`);
+        fs.writeFileSync(path.join(outputPath, fileName), jsonString);
+        console.log(`Assignments successfully saved to ${fileName}`);
         res.status(201).json(assignments);
     } catch (error) {
         console.log('Error writing to file: ', error);
