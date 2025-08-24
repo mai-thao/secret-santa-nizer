@@ -17,11 +17,11 @@ curl -X POST -H "Content-Type: application/json" -d "{\"names\": [\"Jane\", \"Jo
 
 _If you don't have `npm` or Node.js installed on your local machine, see the steps at: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm_
 
-### Wishlist
-* Instead of saving assignments to JSON files, save into sqlite3 database
-* Learn more about Fisher-Yates algorithm for more advanced randomization logic
-
 ### How to Run the Frontend React App
 1) Execute the command: `npm run dev`
 2) Open your browser and navigate to: http://localhost:5173/
 3) Terminate the app with: Ctrl + C
+
+### Wishlist
+* Instead of saving assignments to JSON files, save into sqlite3 database
+* Learn more about Fisher-Yates algorithm for more advanced randomization logic
