@@ -18,6 +18,8 @@ curl -X POST -H "Content-Type: application/json" -d "{\"names\": [\"Jane\", \"Jo
 _If you don't have `npm` or Node.js installed on your local machine, see the steps at: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm_
 
 ### How to Run the Frontend React App
+_Note: The backend Node.js app must be running first otherwise the frontend React app won't function!_
+
 1) Execute the command: `npm run dev`
 2) Open your browser and navigate to: http://localhost:5173/
 3) Terminate the app with: Ctrl + C
