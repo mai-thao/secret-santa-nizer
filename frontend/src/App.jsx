@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [names, setNames] = useState("");
+    const [response, setResponse] = useState("");
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const handleSubmit = async (e) => {
+        // Comma-separated string into array of strings, remove space & empty string
+        const namesArray = names
+            .split(",")
+            .map((n) => n.trim())
+            .filter(Boolean);
+
+        try {
+            const res = await fetch("http://localhost:3001/api/assign", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ names: namesArray }),
+            });
+
+        const json = await res.json();
+        setResponse(JSON.stringify(json, null, 2));
+
+        } catch (err) {
+            setResponse("Unexpected error: " + err.message);
+        }
+    };
+
+    return (
+        <div>
+        <h1>Assign names</h1>
+
+        <form onSubmit = {handleSubmit}>
+            <input
+            type = "text"
+            placeholder = "Type names here"
+            value = {names}
+            onChange = {(e) => setNames(e.target.value)}
+            />
+            <button type = "submit">Send</button>
+        </form>
+
+        <h2>Assignment:</h2>
+        <pre>{response}</pre>
+        </div>
+    );
 }
 
-export default App
+export default App;
