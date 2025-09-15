@@ -5,12 +5,16 @@ function App() {
     const [response, setResponse] = useState("");
 
     const handleSubmit = async (e) => {
+        // Prevent page from reloading when submit form
+        e.preventDefault();
+
         // Comma-separated string into array of strings, remove space & empty string
         const namesArray = names
             .split(",")
             .map((n) => n.trim())
             .filter(Boolean);
 
+        // Retrieve response from backend
         try {
             const res = await fetch("http://localhost:3001/api/assign", {
                 method: "POST",
